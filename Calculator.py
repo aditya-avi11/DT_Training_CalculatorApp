@@ -1,52 +1,76 @@
-# Simple Python Calculator App
+"""
+Simple Calculator Application
+"""
 
-def add(x, y):
-    return x + y
+class Calculator:
+    """A simple calculator class with basic operations"""
+    
+    def add(self, a, b):
+        """Add two numbers"""
+        return a + b
+    
+    def subtract(self, a, b):
+        """Subtract b from a"""
+        return a - b
+    
+    def multiply(self, a, b):
+        """Multiply two numbers"""
+        return a * b
+    
+    def divide(self, a, b):
+        """Divide a by b"""
+        if b == 0:
+            raise ValueError("Cannot divide by zero")
+        return a / b
+    
+    def power(self, a, b):
+        """Raise a to the power of b"""
+        return a ** b
 
-def subtract(x, y):
-    return x - y
 
-def multiply(x, y):
-    return x * y
-
-def divide(x, y):
-    if y == 0:
-        return "Error! Division by zero."
-    return x / y
-
-def calculator():
-    print("Welcome to the Python Calculator!")
-    print("Select operation:")
-    print("1. Add")
-    print("2. Subtract")
-    print("3. Multiply")
-    print("4. Divide")
+def main():
+    """Main function to run the calculator"""
+    calc = Calculator()
+    
+    print("Simple Calculator")
+    print("=" * 40)
+    print("Operations: add, subtract, multiply, divide, power")
+    print("Type 'quit' to exit")
+    print("=" * 40)
     
     while True:
-        choice = input("Enter choice (1/2/3/4 or 'q' to quit): ")
+        operation = input("\nEnter operation: ").lower()
         
-        if choice == 'q':
-            print("Exiting calculator. Goodbye!")
+        if operation == 'quit':
+            print("Goodbye!")
             break
         
-        if choice in ('1', '2', '3', '4'):
-            try:
-                num1 = float(input("Enter first number: "))
-                num2 = float(input("Enter second number: "))
-            except ValueError:
-                print("Invalid input! Please enter numbers.")
-                continue
+        if operation not in ['add', 'subtract', 'multiply', 'divide', 'power']:
+            print("Invalid operation. Please try again.")
+            continue
+        
+        try:
+            a = float(input("Enter first number: "))
+            b = float(input("Enter second number: "))
             
-            if choice == '1':
-                print(f"Result: {add(num1, num2)}")
-            elif choice == '2':
-                print(f"Result: {subtract(num1, num2)}")
-            elif choice == '3':
-                print(f"Result: {multiply(num1, num2)}")
-            elif choice == '4':
-                print(f"Result: {divide(num1, num2)}")
-        else:
-            print("Invalid choice! Please select 1, 2, 3, 4, or 'q'.")
+            if operation == 'add':
+                result = calc.add(a, b)
+            elif operation == 'subtract':
+                result = calc.subtract(a, b)
+            elif operation == 'multiply':
+                result = calc.multiply(a, b)
+            elif operation == 'divide':
+                result = calc.divide(a, b)
+            elif operation == 'power':
+                result = calc.power(a, b)
+            
+            print(f"Result: {result}")
+        
+        except ValueError as e:
+            print(f"Error: {e}")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
 
 if __name__ == "__main__":
-    calculator()
+    main()
