@@ -3,7 +3,7 @@ Unit tests for the Calculator application
 """
 
 import unittest
-from app import Calculator
+from Calculator import Calculator
 
 
 class TestCalculator(unittest.TestCase):
